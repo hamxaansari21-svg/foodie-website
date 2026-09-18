@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Foodie - Your Cart</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ==============================
+           CART PAGE
+        ============================== */
+
+        .cart-header {
+            text-align: center;
+            padding: 55px 20px 30px;
+            background: linear-gradient(
+                135deg,
+                #fff7f2,
+                #ffffff
+            );
+        }
+
+        .cart-header span {
+            color: #ff5722;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .cart-header h1 {
+            margin: 10px 0;
+            font-size: 40px;
+            color: #222;
+        }
+
+        .cart-header p {
+            color: #777;
+            margin: 0;
+        }
+
+
+        /* ==============================
+           CART SECTION
+        ============================== */
+
+        .cart-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 35px 20px 70px;
+
+            display: grid;
+            grid-template-columns: 1.5fr 0.8fr;
+            gap: 25px;
+
+            align-items: start;
+        }
+
+
+        /* ==============================
+           CART ITEMS
+        ============================== */
+
+        .cart-items-container {
+            background: white;
+            border: 1px solid #eeeeee;
+            border-radius: 18px;
+            padding: 25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.06);
+        }
+
+        .cart-items {
+            width: 100%;
+        }
+
+        .cart-item {
+            display: grid;
+
+            grid-template-columns:
+                80px
+                1fr
+                auto
+                auto
+                auto;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 16px 0;
+
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+
+            background: #f5f5f5;
+        }
+
+
+        /* ==============================
+           ITEM INFORMATION
+        ============================== */
+
+        .cart-item-info {
+            min-width: 0;
+        }
+
+        .cart-item-info h3 {
+            margin: 0 0 6px;
+
+            color: #222;
+
+            font-size: 17px;
+        }
+
+        .cart-item-info p {
+            margin: 0;
+
+            color: #888;
+
+            font-size: 13px;
+        }
+
+
+        /* ==============================
+           QUANTITY
+        ============================== */
+
+        .quantity-controls {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .quantity-controls button {
+            width: 30px;
+            height: 30px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #fff1eb;
+
+            color: #ff5722;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .quantity-controls button:hover {
+            background: #ff5722;
+            color: white;
+        }
+
+        .quantity-controls span {
+            min-width: 22px;
+
+            text-align: center;
+
+            font-weight: 700;
+
+            color: #333;
+        }
+
+
+        /* ==============================
+           ITEM TOTAL
+        ============================== */
+
+        .item-total {
+            font-size: 16px;
+
+            font-weight: 800;
+
+            color: #222;
+
+            white-space: nowrap;
+        }
+
+
+        /* ==============================
+           REMOVE BUTTON
+        ============================== */
+
+        .remove-btn {
+            border: none;
+
+            background: #ffe9e9;
+
+            color: #e53935;
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .remove-btn:hover {
+            background: #e53935;
+
+            color: white;
+        }
+
+
+        /* ==============================
+           EMPTY CART
+        ============================== */
+
+        .empty-cart {
+            text-align: center;
+
+            padding: 60px 20px;
+        }
+
+        .empty-cart-icon {
+            font-size: 60px;
+
+            margin-bottom: 15px;
+        }
+
+        .empty-cart h2 {
+            margin: 0 0 8px;
+
+            color: #222;
+        }
+
+        .empty-cart p {
+            margin: 0;
+
+            color: #888;
+        }
+
+        .empty-cart a {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 12px 20px;
+
+            background: #ff5722;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .empty-cart a:hover {
+            background: #e64a19;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ==============================
+           CART SUMMARY
+        ============================== */
+
+        .cart-summary {
+            background: white;
+
+            border: 1px solid #eeeeee;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.06);
+
+            position: sticky;
+
+            top: 20px;
+        }
+
+        .cart-summary h2 {
+            margin: 0 0 20px;
+
+            color: #222;
+
+            font-size: 22px;
+        }
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #eeeeee;
+
+            color: #666;
+
+            font-size: 14px;
+        }
+
+        .summary-row strong {
+            color: #222;
+        }
+
+        .total-row {
+            border-bottom: none;
+
+            padding-top: 20px;
+
+            font-size: 18px;
+
+            color: #222;
+        }
+
+        .total-row strong {
+            color: #ff5722;
+
+            font-size: 22px;
+        }
+
+
+        /* ==============================
+           CHECKOUT BUTTON
+        ============================== */
+
+        .checkout-btn {
+            display: block;
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            background: #ff5722;
+
+            color: white;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .checkout-btn:hover {
+            background: #e64a19;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ==============================
+           CONTINUE SHOPPING
+        ============================== */
+
+        .continue-btn {
+            display: block;
+
+            margin-top: 12px;
+
+            padding: 12px;
+
+            text-align: center;
+
+            color: #555;
+
+            background: #f5f5f5;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+        .continue-btn:hover {
+            background: #eeeeee;
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 900px) {
+
+            .cart-section {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .cart-header h1 {
+                font-size: 30px;
+            }
+
+            .cart-section {
+                padding: 25px 12px 50px;
+            }
+
+            .cart-items-container {
+                padding: 18px;
+            }
+
+            .cart-item {
+
+                grid-template-columns:
+                    65px
+                    1fr
+                    auto;
+
+                gap: 10px;
+
+            }
+
+            .cart-item img {
+                width: 65px;
+                height: 65px;
+            }
+
+            .quantity-controls {
+                grid-column: 2;
+                grid-row: 2;
+            }
+
+            .item-total {
+                grid-column: 3;
+                grid-row: 1;
+            }
+
+            .remove-btn {
+                grid-column: 3;
+                grid-row: 2;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         NAVBAR
+    ============================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🍔 <span>Foodie</span>
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="menu.html">
+                Menu
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a
+                href="cart.html"
+                class="active"
+            >
+                🛒 Cart
+                <span id="cart-count">0</span>
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==============================
+         CART HEADER
+    ============================== -->
+
+    <section class="cart-header">
+
+        <span>
+            🛒 YOUR CART
+        </span>
+
+        <h1>
+            Your Delicious Order
+        </h1>
+
+        <p>
+            Review your items and proceed to checkout.
+        </p>
+
+    </section>
+
+
+    <!-- ==============================
+         CART
+    ============================== -->
+
+    <section class="cart-section">
+
+
+        <!-- CART ITEMS -->
+
+        <div class="cart-items-container">
+
+            <div
+                id="cart-items"
+                class="cart-items"
+            >
+
+                <!--
+                    Cart items will be
+                    automatically displayed
+                    by script.js
+                -->
+
+            </div>
+
+        </div>
+
+
+        <!-- CART SUMMARY -->
+
+        <div class="cart-summary">
+
+            <h2>
+                🧾 Order Summary
+            </h2>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Total Items
+                </span>
+
+                <strong id="summary-items">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row total-row">
+
+                <span>
+                    Total Amount
+                </span>
+
+                <strong id="cart-total">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <a
+                href="checkout.html"
+                class="checkout-btn"
+            >
+                Proceed to Checkout →
+            </a>
+
+
+            <a
+                href="menu.html"
+                class="continue-btn"
+            >
+                ← Continue Shopping
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-logo">
+                🍔 Foodie
+            </div>
+
+            <p>
+                Delicious food delivered to your doorstep.
+            </p>
+
+
+            <div class="footer-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="menu.html">
+                    Menu
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+                <a href="cart.html">
+                    🛒 Cart
+                </a>
+
+            </div>
+
+
+            <p class="copyright">
+                © 2026 Foodie. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ==============================
+         CART JAVASCRIPT
+    ============================== -->
+
+    <script src="script.js"></script>
+
+
+    <!-- ==============================
+         TOTAL ITEM COUNT
+    ============================== -->
+
+    <script>
+
+        function updateCartSummary() {
+
+            const cart = getCart();
+
+            const summaryItems =
+                document.getElementById(
+                    "summary-items"
+                );
+
+            if (!summaryItems) {
+                return;
+            }
+
+            let totalItems = 0;
+
+            cart.forEach(function(item) {
+
+                totalItems +=
+                    Number(item.quantity);
+
+            });
+
+            summaryItems.textContent =
+                totalItems;
+
+        }
+
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                updateCartSummary();
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foodie - Admin Panel</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ADMIN NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🍔 <span>Foodie Admin</span>
+        </div>
+
+       <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+
+    <button
+        id="logout-btn"
+        style="
+            border:none;
+            background:#ff5722;
+            color:white;
+            padding:9px 15px;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:600;
+        "
+    >
+        🚪 Logout
+    </button>
+</div>
+
+    </nav>
+
+
+    <!-- ADMIN HEADER -->
+    <section class="admin-header">
+
+        <div class="admin-tag">
+            ⚙️ ADMIN PANEL
+        </div>
+
+        <h1>
+            Food Management
+            <span>Dashboard</span>
+        </h1>
+
+        <p>
+            Add, manage and delete food items directly from your website.
+        </p>
+
+    </section>
+
+
+    <!-- ADD / EDIT FOOD FORM -->
+    <section class="admin-container">
+
+        <!-- LEFT SIDE -->
+        <div class="admin-card">
+
+            <h2>➕ Add New Food</h2>
+
+            <p class="admin-subtitle">
+                Enter the food details below.
+            </p>
+
+
+            <form id="food-form">
+
+                <!-- FOOD NAME -->
+                <div class="form-group">
+
+                    <label for="food-name">
+                        Food Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="food-name"
+                        placeholder="Example: Chicken Momos"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PRICE -->
+                <div class="form-group">
+
+                    <label for="food-price">
+                        Price (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="food-price"
+                        placeholder="Example: 149"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+                <div class="form-group">
+
+                    <label for="food-category">
+                        Category
+                    </label>
+
+                    <input
+                        type="text"
+                        id="food-category"
+                        placeholder="Example: Momos, Pizza, Dessert..."
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+                <div class="form-group">
+
+                    <label for="food-description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="food-description"
+                        rows="4"
+                        placeholder="Write a short description..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- RATING -->
+                <div class="form-group">
+
+                    <label for="food-rating">
+                        Rating
+                    </label>
+
+                    <input
+                        type="number"
+                        id="food-rating"
+                        placeholder="Example: 4.8"
+                        min="1"
+                        max="5"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BADGE -->
+                <div class="form-group">
+
+                    <label for="food-badge">
+                        Badge
+                    </label>
+
+                    <select id="food-badge">
+
+                        <option value="">
+                            No Badge
+                        </option>
+
+                        <option value="🔥 BEST SELLER">
+                            🔥 BEST SELLER
+                        </option>
+
+                        <option value="⭐ POPULAR">
+                            ⭐ POPULAR
+                        </option>
+
+                        <option value="🌱 VEG">
+                            🌱 VEG
+                        </option>
+
+                        <option value="🔥 SPICY">
+                            🔥 SPICY
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- IMAGE -->
+                <div class="form-group">
+
+                    <label for="food-image">
+                        📷 Food Image
+                    </label>
+
+                    <input
+                        type="file"
+                        id="food-image"
+                        accept="image/*"
+                    >
+
+                    <small>
+                        New food ke liye image select karein.
+                        Edit karte waqt new image optional hai.
+                    </small>
+
+                </div>
+
+
+                <!-- IMAGE PREVIEW -->
+                <div
+                    id="image-preview-container"
+                    style="
+                        display: none;
+                        margin-top: 15px;
+                    "
+                >
+
+                    <p
+                        style="
+                            margin-bottom: 8px;
+                            font-weight: 600;
+                        "
+                    >
+                        Image Preview
+                    </p>
+
+                    <img
+                        id="image-preview"
+                        src=""
+                        alt="Food Preview"
+                        style="
+                            width: 180px;
+                            height: 130px;
+                            object-fit: cover;
+                            border-radius: 12px;
+                            border: 1px solid #ddd;
+                        "
+                    >
+
+                </div>
+
+
+                <!-- SUBMIT -->
+                <button
+                    type="submit"
+                    class="admin-submit-btn"
+                >
+                    ➕ Add Food
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- RIGHT SIDE - FOOD ITEMS -->
+        <div class="admin-card">
+
+            <div class="food-list-header">
+
+                <div>
+
+                    <h2>
+                        🍽️ Food Items
+                    </h2>
+
+                    <p class="admin-subtitle">
+                        Foods stored in Firebase
+                    </p>
+
+                </div>
+
+                <span id="food-count">
+                    0 Items
+                </span>
+
+            </div>
+
+
+            <div id="admin-food-list">
+
+                <div class="admin-loading">
+                    Loading foods...
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ORDERS DASHBOARD
+    ========================================= -->
+
+    <section class="admin-container">
+
+        <div class="admin-card">
+
+            <div class="food-list-header">
+
+                <div>
+
+                    <h2>
+                        📦 Customer Orders
+                    </h2>
+
+                    <p class="admin-subtitle">
+                        Manage all customer orders
+                    </p>
+
+                </div>
+
+                <span id="order-count">
+                    0 Orders
+                </span>
+
+            </div>
+
+
+            <!-- ORDER SEARCH -->
+
+            <div style="
+                margin-bottom:20px;
+            ">
+
+                <input
+                    type="text"
+                    id="order-search"
+                    placeholder="🔍 Search by name, phone or Order ID..."
+                    style="
+                        width:100%;
+                        box-sizing:border-box;
+                        padding:13px 15px;
+                        border:1px solid #ddd;
+                        border-radius:10px;
+                        outline:none;
+                        font-size:14px;
+                    "
+                >
+
+            </div>
+
+
+            <!-- ORDERS -->
+
+            <div id="admin-order-list">
+
+                <div class="admin-loading">
+                    Loading orders...
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FIREBASE / ADMIN JAVASCRIPT -->
+
+    <script
+        type="module"
+        src="admin.js"
+    ></script>
+
+</body>
+
+</html>

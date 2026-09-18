@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Foodie - Checkout</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================
+           CHECKOUT PAGE
+        ========================================= */
+
+        .checkout-page {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 40px 20px 70px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+        }
+
+        .checkout-card {
+            background: white;
+            border: 1px solid #eeeeee;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        .checkout-card h2 {
+            margin-top: 0;
+            color: #222;
+        }
+
+        .checkout-subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .checkout-form-group {
+            margin-bottom: 17px;
+        }
+
+        .checkout-form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .checkout-form-group input,
+        .checkout-form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .checkout-form-group input:focus,
+        .checkout-form-group textarea:focus {
+            border-color: #ff5722;
+            box-shadow: 0 0 0 3px rgba(255,87,34,0.1);
+        }
+
+        .checkout-form-group textarea {
+            resize: vertical;
+        }
+
+        .whatsapp-order-btn {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            background: #25D366;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: 0.2s;
+        }
+
+        .whatsapp-order-btn:hover {
+            transform: translateY(-2px);
+            background: #1ebe5d;
+        }
+
+        .whatsapp-order-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .checkout-items {
+            margin-top: 15px;
+        }
+
+        .checkout-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .checkout-item img {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .checkout-item-info {
+            flex: 1;
+        }
+
+        .checkout-item-info h3 {
+            margin: 0 0 5px;
+            font-size: 15px;
+            color: #222;
+        }
+
+        .checkout-item-info p {
+            margin: 0;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .checkout-item-price {
+            font-weight: 700;
+            color: #222;
+            white-space: nowrap;
+        }
+
+        .checkout-total-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 2px solid #eeeeee;
+        }
+
+        .checkout-total-box span {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .checkout-total-box strong {
+            font-size: 22px;
+            color: #ff5722;
+        }
+
+        .checkout-empty {
+            text-align: center;
+            padding: 35px 10px;
+            color: #888;
+        }
+
+        .checkout-empty-icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .checkout-empty a {
+            display: inline-block;
+            margin-top: 12px;
+            text-decoration: none;
+            color: #ff5722;
+            font-weight: 700;
+        }
+
+        @media (max-width: 800px) {
+
+            .checkout-page {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .checkout-card {
+                padding: 20px;
+            }
+
+            .checkout-item {
+                align-items: flex-start;
+            }
+
+            .checkout-item-price {
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVBAR
+    ========================================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🍔 <span>Foodie</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="menu.html">
+                Menu
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="cart.html">
+                🛒 Cart
+                <span id="cart-count">0</span>
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================
+         CHECKOUT HEADER
+    ========================================= -->
+
+    <section class="cart-header">
+
+        <span>
+            🧾 CHECKOUT
+        </span>
+
+        <h1>
+            Complete Your Order
+        </h1>
+
+        <p>
+            Enter your details and place your order on WhatsApp.
+        </p>
+
+    </section>
+
+
+    <!-- =========================================
+         CHECKOUT
+    ========================================= -->
+
+    <section class="checkout-page">
+
+
+        <!-- =====================================
+             CUSTOMER DETAILS
+        ====================================== -->
+
+        <div class="checkout-card">
+
+            <h2>
+                👤 Customer Details
+            </h2>
+
+            <p class="checkout-subtitle">
+                Please enter your delivery information.
+            </p>
+
+
+            <form id="checkoutForm">
+
+
+                <div class="checkout-form-group">
+
+                    <label for="customerName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="checkout-form-group">
+
+                    <label for="customerPhone">
+                        WhatsApp / Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="customerPhone"
+                        placeholder="Enter your WhatsApp number"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="checkout-form-group">
+
+                    <label for="customerAddress">
+                        Delivery Address
+                    </label>
+
+                    <textarea
+                        id="customerAddress"
+                        rows="3"
+                        placeholder="House no., street, area..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="checkout-form-group">
+
+                    <label for="customerCity">
+                        City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerCity"
+                        placeholder="Example: Nashik"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="checkout-form-group">
+
+                    <label for="customerPincode">
+                        Pincode
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerPincode"
+                        placeholder="Example: 422005"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="checkout-form-group">
+
+                    <label for="instructions">
+                        Special Instructions
+                    </label>
+
+                    <textarea
+                        id="instructions"
+                        rows="3"
+                        placeholder="Example: Less spicy, deliver before 9 PM..."
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="whatsapp-order-btn"
+                    id="place-order-btn"
+                >
+                    📱 Place Order on WhatsApp
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- =====================================
+             ORDER SUMMARY
+        ====================================== -->
+
+        <div class="checkout-card">
+
+            <h2>
+                🛒 Your Order
+            </h2>
+
+            <p class="checkout-subtitle">
+                Review your items before placing the order.
+            </p>
+
+
+            <div
+                id="checkout-items"
+                class="checkout-items"
+            ></div>
+
+
+            <div class="checkout-total-box">
+
+                <span>
+                    Total Amount
+                </span>
+
+                <strong id="checkout-total">
+                    ₹0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-logo">
+                🍔 Foodie
+            </div>
+
+            <p>
+                Delicious food delivered to your doorstep.
+            </p>
+
+            <div class="footer-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="menu.html">
+                    Menu
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+                <a href="cart.html">
+                    Cart
+                </a>
+
+            </div>
+
+            <p class="copyright">
+                © 2026 Foodie. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================
+         EXISTING CART SYSTEM
+    ========================================= -->
+
+    <script src="script.js"></script>
+
+
+    <!-- =========================================
+         FIREBASE + CHECKOUT SYSTEM
+    ========================================= -->
+
+    <script type="module">
+
+        /* =========================================
+           FIREBASE IMPORT
+        ========================================= */
+
+        import { db } from "./firebase-config.js";
+
+        import {
+            collection,
+            addDoc
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+        /* =========================================
+           HTML ELEMENTS
+        ========================================= */
+
+        const checkoutItems =
+            document.getElementById("checkout-items");
+
+        const checkoutTotal =
+            document.getElementById("checkout-total");
+
+        const checkoutForm =
+            document.getElementById("checkoutForm");
+
+        const placeOrderButton =
+            document.getElementById("place-order-btn");
+
+
+        /* =========================================
+           DISPLAY CHECKOUT ITEMS
+        ========================================= */
+
+        function displayCheckoutItems() {
+
+            const cart = getCart();
+
+            checkoutItems.innerHTML = "";
+
+
+            /* EMPTY CART */
+
+            if (cart.length === 0) {
+
+                checkoutItems.innerHTML = `
+
+                    <div class="checkout-empty">
+
+                        <div class="checkout-empty-icon">
+                            🛒
+                        </div>
+
+                        <h3>
+                            Your cart is empty
+                        </h3>
+
+                        <p>
+                            Please add some food before checkout.
+                        </p>
+
+                        <a href="menu.html">
+                            Browse Menu →
+                        </a>
+
+                    </div>
+
+                `;
+
+                checkoutTotal.textContent = "₹0";
+
+                return;
+
+            }
+
+
+            /* CALCULATE TOTAL */
+
+            let total = 0;
+
+
+            cart.forEach(function(item) {
+
+                const price =
+                    Number(item.price) || 0;
+
+                const quantity =
+                    Number(item.quantity) || 1;
+
+                const itemTotal =
+                    price * quantity;
+
+
+                total += itemTotal;
+
+
+                const itemElement =
+                    document.createElement("div");
+
+                itemElement.className =
+                    "checkout-item";
+
+
+                itemElement.innerHTML = `
+
+                    <img
+                        src="${item.image || "images/food.jpg"}"
+                        alt="${item.name}"
+                        onerror="this.src='images/food.jpg'"
+                    >
+
+                    <div class="checkout-item-info">
+
+                        <h3>
+                            ${item.name}
+                        </h3>
+
+                        <p>
+                            ₹${price} × ${quantity}
+                        </p>
+
+                    </div>
+
+                    <div class="checkout-item-price">
+                        ₹${itemTotal}
+                    </div>
+
+                `;
+
+
+                checkoutItems.appendChild(
+                    itemElement
+                );
+
+            });
+
+
+            checkoutTotal.textContent =
+                "₹" + total;
+
+        }
+
+
+        /* =========================================
+           PLACE ORDER
+        ========================================= */
+
+        checkoutForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                /* GET CURRENT CART */
+
+                const cart = getCart();
+
+
+                /* CHECK CART */
+
+                if (cart.length === 0) {
+
+                    alert(
+                        "Your cart is empty! Please add food first. 🛒"
+                    );
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   GET CUSTOMER DETAILS
+                ================================= */
+
+                const customerName =
+                    document
+                        .getElementById("customerName")
+                        .value
+                        .trim();
+
+
+                const customerPhone =
+                    document
+                        .getElementById("customerPhone")
+                        .value
+                        .trim();
+
+
+                const customerAddress =
+                    document
+                        .getElementById("customerAddress")
+                        .value
+                        .trim();
+
+
+                const customerCity =
+                    document
+                        .getElementById("customerCity")
+                        .value
+                        .trim();
+
+
+                const customerPincode =
+                    document
+                        .getElementById("customerPincode")
+                        .value
+                        .trim();
+
+
+                const instructions =
+                    document
+                        .getElementById("instructions")
+                        .value
+                        .trim();
+
+
+                /* =================================
+                   CALCULATE ORDER TOTAL
+                ================================= */
+
+                let total = 0;
+
+
+                cart.forEach(function(item) {
+
+                    const price =
+                        Number(item.price) || 0;
+
+                    const quantity =
+                        Number(item.quantity) || 1;
+
+
+                    total +=
+                        price * quantity;
+
+                });
+
+
+                /* =================================
+                   PREPARE ITEMS FOR FIREBASE
+                ================================= */
+
+                const orderItems =
+                    cart.map(function(item) {
+
+                        return {
+
+                            name: item.name,
+
+                            price:
+                                Number(item.price) || 0,
+
+                            quantity:
+                                Number(item.quantity) || 1
+
+                        };
+
+                    });
+
+
+                /* =================================
+                   CREATE ORDER OBJECT
+                ================================= */
+
+                const orderData = {
+
+                    customerName:
+                        customerName,
+
+                    customerPhone:
+                        customerPhone,
+
+                    address:
+                        customerAddress,
+
+                    city:
+                        customerCity,
+
+                    pincode:
+                        customerPincode,
+
+                    instructions:
+                        instructions,
+
+                    items:
+                        orderItems,
+
+                    total:
+                        total,
+
+                    status:
+                        "Pending",
+
+                    createdAt:
+                        new Date().toISOString()
+
+                };
+
+
+                /* =================================
+                   DISABLE BUTTON
+                ================================= */
+
+                placeOrderButton.disabled = true;
+
+                placeOrderButton.textContent =
+                    "⏳ Saving Order...";
+
+
+                /* =================================
+                   SAVE ORDER TO FIREBASE
+                ================================= */
+
+                try {
+
+                    const orderReference =
+                        await addDoc(
+                            collection(
+                                db,
+                                "orders"
+                            ),
+                            orderData
+                        );
+
+
+                    console.log(
+                        "Order saved successfully:",
+                        orderReference.id
+                    );
+
+
+                    /* =================================
+                       CREATE WHATSAPP MESSAGE
+                    ================================= */
+
+                    let message =
+                        "🍔 *FOODIE - NEW ORDER*";
+
+
+                    message +=
+                        "\n━━━━━━━━━━━━━━━━━━";
+
+
+                    message +=
+                        "\n\n👤 *CUSTOMER DETAILS*";
+
+
+                    message +=
+                        "\nName: " +
+                        customerName;
+
+
+                    message +=
+                        "\nWhatsApp: " +
+                        customerPhone;
+
+
+                    message +=
+                        "\n\n📍 *DELIVERY DETAILS*";
+
+
+                    message +=
+                        "\nAddress: " +
+                        customerAddress;
+
+
+                    message +=
+                        "\nCity: " +
+                        customerCity;
+
+
+                    message +=
+                        "\nPincode: " +
+                        customerPincode;
+
+
+                    message +=
+                        "\n\n🛒 *ORDER ITEMS*";
+
+
+                    message +=
+                        "\n━━━━━━━━━━━━━━━━━━";
+
+
+                    cart.forEach(
+                        function(item, index) {
+
+                            const price =
+                                Number(item.price) || 0;
+
+                            const quantity =
+                                Number(item.quantity) || 1;
+
+                            const itemTotal =
+                                price * quantity;
+
+
+                            message +=
+                                "\n\n" +
+                                (index + 1) +
+                                ". *" +
+                                item.name +
+                                "*";
+
+
+                            message +=
+                                "\n   Quantity: " +
+                                quantity;
+
+
+                            message +=
+                                "\n   Price: ₹" +
+                                price;
+
+
+                            message +=
+                                "\n   Subtotal: ₹" +
+                                itemTotal;
+
+                        }
+                    );
+
+
+                    message +=
+                        "\n\n━━━━━━━━━━━━━━━━━━";
+
+
+                    message +=
+                        "\n💰 *TOTAL: ₹" +
+                        total +
+                        "*";
+
+
+                    if (instructions) {
+
+                        message +=
+                            "\n\n📝 *SPECIAL INSTRUCTIONS*";
+
+
+                        message +=
+                            "\n" +
+                            instructions;
+
+                    }
+
+
+                    message +=
+                        "\n\n🆔 *ORDER ID:* " +
+                        orderReference.id;
+
+
+                    message +=
+                        "\n\n🙏 Thank you for ordering from *Foodie*!";
+
+
+                    /* =================================
+                       YOUR WHATSAPP NUMBER
+                    ================================= */
+
+                    const ownerNumber =
+                        "917020285537";
+
+
+                    const whatsappURL =
+                        "https://wa.me/" +
+                        ownerNumber +
+                        "?text=" +
+                        encodeURIComponent(
+                            message
+                        );
+
+
+                    /* =================================
+                       OPEN WHATSAPP
+                    ================================= */
+
+                    const whatsappWindow =
+                        window.open(
+                            whatsappURL,
+                            "_blank"
+                        );
+
+
+                    /* =================================
+                       CLEAR CART
+                    ================================= */
+
+                    if (whatsappWindow) {
+
+                        localStorage.removeItem(
+                            "foodieCart"
+                        );
+
+
+                        updateCartCount();
+
+
+                        alert(
+                            "Order saved successfully! 🎉"
+                        );
+
+                    } else {
+
+                        alert(
+                            "Order saved, but WhatsApp could not open. Please allow pop-ups."
+                        );
+
+                    }
+
+
+                    /* RESET BUTTON */
+
+                    placeOrderButton.disabled =
+                        false;
+
+                    placeOrderButton.textContent =
+                        "📱 Place Order on WhatsApp";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Order save error:",
+                        error
+                    );
+
+
+                    alert(
+                        "Order save nahi hua. Please try again."
+                    );
+
+
+                    placeOrderButton.disabled =
+                        false;
+
+
+                    placeOrderButton.textContent =
+                        "📱 Place Order on WhatsApp";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           PAGE LOAD
+        ========================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                displayCheckoutItems();
+
+                updateCartCount();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

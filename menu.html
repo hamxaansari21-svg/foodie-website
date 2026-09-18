@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foodie - Menu</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================================
+         NAVBAR
+    ================================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🍔 <span>Foodie</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="menu.html" class="active">
+                Menu
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="cart.html">
+                🛒 Cart
+                <span id="cart-count">0</span>
+            </a>
+
+            <a href="menu.html" class="order-btn">
+                🛍️ Order Now
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================================
+         MENU HEADER
+    ================================= -->
+
+    <section class="advanced-menu-header">
+
+        <div class="menu-tag">
+            🍽️ OUR MENU
+        </div>
+
+        <h1>
+            Delicious Food,
+            <span>Made For You</span>
+        </h1>
+
+        <p>
+            Explore our delicious collection of freshly prepared
+            food and order your favourite meal.
+        </p>
+
+    </section>
+
+
+    <!-- ================================
+         SEARCH + CATEGORIES
+    ================================= -->
+
+    <section class="menu-controls">
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="food-search"
+                placeholder="Search your favourite food..."
+            >
+
+        </div>
+
+
+        <!-- CATEGORY BUTTONS -->
+
+        <div
+            class="category-buttons"
+            id="category-buttons"
+        >
+
+            <button
+                class="category-btn active-category"
+                data-category="all"
+            >
+                🍽️ All
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         FOOD MENU
+    ================================= -->
+
+    <section class="menu-section advanced-menu">
+
+        <div
+            class="food-grid"
+            id="food-grid"
+        >
+
+            <!-- Firebase foods will appear here -->
+
+            <div class="admin-loading">
+
+                🍔 Loading delicious foods...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         CTA
+    ================================= -->
+
+    <section class="cta">
+
+        <div class="cta-content">
+
+            <h2>
+                Hungry? Let's Fix That! 🍔
+            </h2>
+
+            <p>
+                Choose your favourite food and add it
+                to your cart today.
+            </p>
+
+            <a
+                href="menu.html"
+                class="cta-btn"
+            >
+                Explore Menu →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-logo">
+                🍔 Foodie
+            </div>
+
+            <p>
+                Delicious food delivered to your doorstep.
+            </p>
+
+            <div class="footer-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="menu.html">
+                    Menu
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+                <a href="cart.html">
+                    🛒 Cart
+                </a>
+
+            </div>
+
+            <p class="copyright">
+                © 2026 Foodie. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================================
+         CART JAVASCRIPT
+    ================================= -->
+
+    <script src="script.js"></script>
+
+
+    <!-- ================================
+         FIREBASE MENU JAVASCRIPT
+    ================================= -->
+
+    <script
+        type="module"
+        src="menu.js"
+    ></script>
+    <!-- =====================================
+     REVIEWS MODAL
+===================================== -->
+
+<div id="review-modal" class="review-modal">
+
+    <div class="review-modal-box">
+
+        <button
+            id="close-review-modal"
+            class="close-review-modal"
+        >
+            ✕
+        </button>
+
+        <h2 id="review-food-name">
+            ⭐ Food Reviews
+        </h2>
+
+        <div id="review-list">
+            Loading reviews...
+        </div>
+
+        <hr>
+
+        <h3>Write a Review</h3>
+
+        <div
+            id="star-rating"
+            class="star-rating"
+        >
+            <button data-rating="1">⭐</button>
+            <button data-rating="2">⭐</button>
+            <button data-rating="3">⭐</button>
+            <button data-rating="4">⭐</button>
+            <button data-rating="5">⭐</button>
+        </div>
+
+        <textarea
+            id="review-comment"
+            placeholder="Write your review..."
+            rows="4"
+        ></textarea>
+
+        <button
+            id="submit-review"
+            class="submit-review-btn"
+        >
+            Submit Review ⭐
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
